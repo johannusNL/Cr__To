@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        submodules: true  # Initialize submodules
+        submodules: false  # Initialize submodules
 
     - name: Configure Git
       run: |
@@ -25,5 +25,9 @@ jobs:
         git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
         git add .gitmodules themes/ananke
         git commit -m "Add Ananke theme as submodule"
-        git push origin main
 
+    - name: Push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git push origin main
