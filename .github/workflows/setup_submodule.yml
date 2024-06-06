@@ -15,9 +15,15 @@ jobs:
       with:
         submodules: true  # Initialize submodules
 
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+
     - name: Add Ananke theme as submodule
       run: |
         git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
         git add .gitmodules themes/ananke
         git commit -m "Add Ananke theme as submodule"
         git push origin main
+
