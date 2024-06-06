@@ -1,0 +1,23 @@
+name: Setup Submodule
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: true  # Initialize submodules
+
+    - name: Add Ananke theme as submodule
+      run: |
+        git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
+        git add .gitmodules themes/ananke
+        git commit -m "Add Ananke theme as submodule"
+        git push origin main
